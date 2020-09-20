@@ -1,0 +1,48 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10
+    environment:
+      DOCKER_SERVER: $REGISTRY_SERVER
+      IMAGE_NAME: $IMAGE_NAME
+    steps:
+      - checkout:
+          post:
+            - git fetch --all
+      - setup_remote_docker
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run: yarn install --freeze-lockfile
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - run:
+          name: Run linting
+          command: yarn run lint
+      - run:
+          name: Run Test
+          command: yarn run test
+      - run:
+          name: Run Build
+          command: yarn run build
+      - store_artifacts:
+          path: build/
+      - run:
+          name: Build and push Docker image
+          command: |
+            mkdir -p project
+            docker build -t $REGISTRY_SERVER/$IMAGE__NAME .
+            docker login -u $REGISTRY_UN -p $REGISTRY_PW $REGISTRY_SERVER
+            docker push $REGISTRY_SERVER/$IMAGE__NAME
+            docker rmi -f $REGISTRY_SERVER/$IMAGE__NAME
+workflows:
+  version: 2
+  build-deploy-image:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
