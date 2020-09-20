@@ -28,12 +28,6 @@
                 "args": "none"
             }
         ],
-        "@typescript-eslint/no-explicit-any": [
-            "error",
-            {
-                "ignoreRestArgs": true
-            }
-        ],
         "max-len": [
             "warn",
             {
@@ -69,6 +63,8 @@
         "react/no-unescaped-entities": "off",
         "react/jsx-one-expression-per-line": "off",
         "react/jsx-wrap-multilines": "off",
-        "react/destructuring-assignment": "off"
+        "react/destructuring-assignment": "off",
+        "@typescript-eslint/no-explicit-any": "off"
+
     }
 }

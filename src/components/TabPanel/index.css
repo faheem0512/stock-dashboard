@@ -1,0 +1,19 @@
+.tab-container {
+  display: flex;
+  height: 60px;
+  flex: 1;
+}
+.tab {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.tab-panel {
+  display: flex;
+  background-color: #b3b3b3;
+  font-size: 1.25rem;
+}

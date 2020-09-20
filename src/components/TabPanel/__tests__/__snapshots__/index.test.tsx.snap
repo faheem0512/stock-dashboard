@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tab Panel tab panel render without error 1`] = `
+<div>
+  <div
+    class="tab-panel"
+    data-testid="tabPanel"
+  >
+    <div
+      class="tab-container"
+    >
+      <a
+        class="tab"
+        href="/one"
+      >
+        One
+      </a>
+      <a
+        class="tab"
+        href="/two"
+      >
+        Two
+      </a>
+    </div>
+  </div>
+</div>
+`;
