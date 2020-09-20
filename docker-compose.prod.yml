@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+
+  stock-dashboard-prod:
+    container_name: stock-dashboard-prod
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '1337:80'
