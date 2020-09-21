@@ -48,7 +48,7 @@
     "lint:fix": "yarn format && yarn lint --fix",
     "format": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}'",
     "predeploy": "yarn run build",
-    "deploy": "gh-pages -b master -d build"
+    "deploy": "gh-pages -b github-page-deployment -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
