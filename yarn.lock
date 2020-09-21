@@ -5111,6 +5111,11 @@ fast-deep-equal@^3.1.1:
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.1.tgz#545145077c501491e33b15ec408c294376e94ae4"
   integrity sha512-8UEa58QDLauDNfpbrX55Q9jrGHThw2ZMdOky5Gl1CDtVeJDPVrG4Jxx1N8jw2gkWaff5UUuX1KJd+9zGe2B+ZA==
 
+fast-deep-equal@^3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
+  integrity sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==
+
 fast-diff@^1.1.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.2.0.tgz#73ee11982d86caaf7959828d519cfe927fac5f03"
@@ -11534,6 +11539,13 @@ url@^0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
+
+use-state-persist@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/use-state-persist/-/use-state-persist-0.2.2.tgz#b37e1a8b5db652b1e3dfc1a6d2bb3e1dfba8475a"
+  integrity sha512-L4HNSWM8ytBVc4eYnydS+4Dk41aNdx6YCYKDLs1xjEbT6PlU6aRQ0UxDNxOeduzfwT43Yq6IkTmrbW65LYiquw==
+  dependencies:
+    fast-deep-equal "^3.1.3"
 
 use@^3.1.0:
   version "3.1.1"

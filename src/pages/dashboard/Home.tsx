@@ -15,11 +15,7 @@ const Home: React.FC<any> = () => {
     return cleanUp;
   }, [fetchHistoricalData, cleanUp]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  return <Chart data={data} error={error} />;
+  return <Chart data={data} error={error} dataId="home" loading={loading} />;
 };
 
 export default Home;

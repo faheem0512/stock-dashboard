@@ -5,7 +5,7 @@ import useLiveData from './hooks/useLiveData';
 const LiveChart: React.FC<any> = () => {
   const [data, error] = useLiveData();
 
-  return <Chart data={data} error={error} />;
+  return <Chart data={data} error={error} dataId="live" />;
 };
 
 export default LiveChart;

@@ -1,28 +1,31 @@
-import React from 'react';
-import moment from 'moment';
+import React, { useEffect } from 'react';
 import Chart from 'react-google-charts';
+import { useStatePersist } from 'use-state-persist';
+import { formatChartData } from './Chart.helpers';
 
 export interface IChart {
   error?: string;
   data: string[];
   testId?: string;
+  dataId: string;
+  loading?: boolean;
 }
 
 const OHLCChart: React.FC<IChart> = (props) => {
-  const { error, data, testId } = props;
+  const { error, data, testId, dataId } = props;
+  const [localData, setLocalData] = useStatePersist<any>(`@${  dataId}`, []);
+  useEffect(() => {
+    if (data && data.length > 0) {
+      setLocalData(data);
+    }
+  }, [data]);
+
   if (error) {
     return <div>{error}</div>;
+  } if (!localData) {
+    return <div>Loading</div>;
   }
-  if (!data || data.length < 1) {
-    return <div>No Data</div>;
-  }
-
-  const chartData = data.map((dataItem: string) => {
-    const item: number[] = dataItem
-      .split(',')
-      .map((stringItem) => Number(stringItem));
-    return [moment(item[0]).format('DD/MM/YYYY'), ...item.slice(1, 5)];
-  });
+  const chartData = formatChartData(localData);
   return (
     <div className="chart-container">
       <Chart
