@@ -18,7 +18,7 @@ const OHLCChart: React.FC<IChart> = (props) => {
     if (data && data.length > 0) {
       setLocalData(data);
     }
-  }, [data]);
+  }, [data,setLocalData]);
 
   if (error) {
     return <div>{error}</div>;
