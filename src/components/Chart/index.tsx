@@ -13,16 +13,17 @@ export interface IChart {
 
 const OHLCChart: React.FC<IChart> = (props) => {
   const { error, data, testId, dataId } = props;
-  const [localData, setLocalData] = useStatePersist<any>(`@${  dataId}`, []);
+  const [localData, setLocalData] = useStatePersist<any>(`@${dataId}`, []);
   useEffect(() => {
     if (data && data.length > 0) {
       setLocalData(data);
     }
-  }, [data,setLocalData]);
+  }, [data, setLocalData]);
 
   if (error) {
     return <div>{error}</div>;
-  } if (!localData) {
+  }
+  if (!localData) {
     return <div>Loading</div>;
   }
   const chartData = formatChartData(localData);

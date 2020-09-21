@@ -18,14 +18,14 @@ export const useAsyncAction: UseAsyncAction = (action) => {
     } finally {
       setLoading(false);
     }
-  //eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   const cleanUp = useCallback(() => {
     setLoading(false);
     setError(null);
     setData(null);
-    //eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   return [{ loading, data, error }, callAsyncAction, cleanUp];
