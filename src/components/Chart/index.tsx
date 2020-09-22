@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import Chart from 'react-google-charts';
 import { useStatePersist } from 'use-state-persist';
+import Chart from './Chart';
 import { formatChartData } from './Chart.helpers';
 
 export interface IChart {
@@ -27,21 +27,7 @@ const OHLCChart: React.FC<IChart> = (props) => {
     return <div>Loading</div>;
   }
   const chartData = formatChartData(localData);
-  return (
-    <div className="chart-container">
-      <Chart
-        width="100%"
-        height={400}
-        chartType="CandlestickChart"
-        loader={<div>Loading Chart</div>}
-        data={[['date', 'open', 'high', 'low', 'close'], ...chartData]}
-        options={{
-          legend: 'none',
-        }}
-        rootProps={{ 'data-testid': testId }}
-      />
-    </div>
-  );
+  return <Chart type="hybrid" data={chartData} data-testid={testId} />;
 };
 
 OHLCChart.defaultProps = {
