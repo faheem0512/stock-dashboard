@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /* Sample modified from react-stock charts */
 
 
@@ -15,7 +17,7 @@ import { discontinuousTimeScaleProviderBuilder } from 'react-stockcharts/lib/sca
 import { OHLCTooltip } from 'react-stockcharts/lib/tooltip';
 import { ema, sma, macd } from 'react-stockcharts/lib/indicator';
 import { fitWidth } from 'react-stockcharts/lib/helper';
-import ZoomButtons from "react-stockcharts/lib/ZoomButtons";
+import ZoomButtons from 'react-stockcharts/lib/ZoomButtons';
 
 function getMaxUndefined(calculators) {
   return calculators.map(each => each.undefinedLength()).reduce((a, b) => Math.max(a, b));
@@ -23,61 +25,61 @@ function getMaxUndefined(calculators) {
 const LENGTH_TO_SHOW = 180;
 
 const processData = (inputData) => {
-    const ema26 = ema()
-      .id(0)
-      .options({ windowSize: 26 })
-      .merge((d, c) => {d.ema26 = c;})
-      .accessor(d => d.ema26);
+  const ema26 = ema()
+    .id(0)
+    .options({ windowSize: 26 })
+    .merge((d, c) => {d.ema26 = c;})
+    .accessor(d => d.ema26);
 
-    const ema12 = ema()
-      .id(1)
-      .options({ windowSize: 12 })
-      .merge((d, c) => {d.ema12 = c;})
-      .accessor(d => d.ema12);
+  const ema12 = ema()
+    .id(1)
+    .options({ windowSize: 12 })
+    .merge((d, c) => {d.ema12 = c;})
+    .accessor(d => d.ema12);
 
-    const macdCalculator = macd()
-      .options({
-        fast: 12,
-        slow: 26,
-        signal: 9,
-      })
-      .merge((d, c) => {d.macd = c;})
-      .accessor(d => d.macd);
+  const macdCalculator = macd()
+    .options({
+      fast: 12,
+      slow: 26,
+      signal: 9,
+    })
+    .merge((d, c) => {d.macd = c;})
+    .accessor(d => d.macd);
 
-    const smaVolume50 = sma()
-      .id(3)
-      .options({
-        windowSize: 50,
-        sourcePath: 'volume',
-      })
-      .merge((d, c) => {d.smaVolume50 = c;})
-      .accessor(d => d.smaVolume50);
+  const smaVolume50 = sma()
+    .id(3)
+    .options({
+      windowSize: 50,
+      sourcePath: 'volume',
+    })
+    .merge((d, c) => {d.smaVolume50 = c;})
+    .accessor(d => d.smaVolume50);
 
-    const maxWindowSize = getMaxUndefined([ema26,
-      ema12,
-      macdCalculator,
-      smaVolume50
-    ]);
+  const maxWindowSize = getMaxUndefined([ema26,
+    ema12,
+    macdCalculator,
+    smaVolume50
+  ]);
 
-    const dataToCalculate = inputData.slice(-LENGTH_TO_SHOW - maxWindowSize);
+  const dataToCalculate = inputData.slice(-LENGTH_TO_SHOW - maxWindowSize);
 
-    const calculatedData = ema26(ema12(macdCalculator(smaVolume50(dataToCalculate))));
-    const indexCalculator = discontinuousTimeScaleProviderBuilder().indexCalculator();
-    const { index } = indexCalculator(calculatedData);
+  const calculatedData = ema26(ema12(macdCalculator(smaVolume50(dataToCalculate))));
+  const indexCalculator = discontinuousTimeScaleProviderBuilder().indexCalculator();
+  const { index } = indexCalculator(calculatedData);
 
-    const xScaleProvider = discontinuousTimeScaleProviderBuilder()
-      .withIndex(index);
-    const { data: linearData, xScale, xAccessor, displayXAccessor } = xScaleProvider(calculatedData.slice(-LENGTH_TO_SHOW));
+  const xScaleProvider = discontinuousTimeScaleProviderBuilder()
+    .withIndex(index);
+  const { data: linearData, xScale, xAccessor, displayXAccessor } = xScaleProvider(calculatedData.slice(-LENGTH_TO_SHOW));
   return  {
-      ema26,
-      ema12,
-      macdCalculator,
-      smaVolume50,
-      linearData,
-      data: linearData,
-      xScale,
-      xAccessor, displayXAccessor
-    };
+    ema26,
+    ema12,
+    macdCalculator,
+    smaVolume50,
+    linearData,
+    data: linearData,
+    xScale,
+    xAccessor, displayXAccessor
+  };
 };
 
 
@@ -86,21 +88,23 @@ class CandleStickChart extends React.Component {
     super(props);
     this.handleDownloadMore = this.handleDownloadMore.bind(this);
   }
+
   state = {
-      seriesNameSuffix:0
+    seriesNameSuffix:0
   };
 
   static getDerivedStateFromProps(props, state){
-    if(props.data!==state.oldData){
-        const seriesNameSuffix = props.data.length < 20 ? state.seriesNameSuffix + 1 : state.seriesNameSuffix;
+    if (props.data!==state.oldData){
+      const seriesNameSuffix = props.data.length < 20 ? state.seriesNameSuffix + 1 : state.seriesNameSuffix;
       return {
         ...processData(props.data),
         oldData: props.data,
         seriesNameSuffix
       };
     }
-    else return null;
+    return null;
   }
+
   handleDownloadMore(start, end) {
     if (Math.ceil(start) === end) return;
     // console.log("rows to download", rowsToDownload, start, end)
@@ -136,22 +140,23 @@ class CandleStickChart extends React.Component {
 
     const { data: linearData, xScale, xAccessor, displayXAccessor } = xScaleProvider(calculatedData.slice(-rowsToDownload).concat(prevData));
 
-      this.setState({
-          data: linearData,
-          xScale,
-          xAccessor,
-          displayXAccessor,
-      });
+    this.setState({
+      data: linearData,
+      xScale,
+      xAccessor,
+      displayXAccessor,
+    });
   }
-    handleReset = () => {
-        this.setState({
-            seriesNameSuffix: this.state.seriesNameSuffix + 1
-        })
-    };
+
+  handleReset = () => {
+    this.setState({
+      seriesNameSuffix: this.state.seriesNameSuffix + 1
+    });
+  };
 
   render() {
     const { type, width, ratio } = this.props;
-    const { data, ema26, ema12, xScale, xAccessor, displayXAccessor,seriesNameSuffix } = this.state;
+    const { data, ema26, ema12, xScale, xAccessor, displayXAccessor, seriesNameSuffix } = this.state;
 
     return (
       <ChartCanvas
