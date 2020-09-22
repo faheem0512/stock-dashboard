@@ -1,10 +1,14 @@
-import moment from 'moment';
+const DATA_TYPE = ['date', 'open', 'high', 'low', 'close', 'volume'];
 
 export const formatChartData = (data: string[]) => {
   return data.map((dataItem: string) => {
     const item: number[] = dataItem
       .split(',')
       .map((stringItem) => Number(stringItem));
-    return [moment(item[0]).format('DD/MM/YYYY'), ...item.slice(1, 5)];
+    const formattedData: any = {};
+    item.forEach((val, index) => {
+      formattedData[DATA_TYPE[index]] = index ? val : new Date(val);
+    });
+    return formattedData;
   });
 };
