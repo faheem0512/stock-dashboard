@@ -23,7 +23,7 @@ const OHLCChart: React.FC<IChart> = (props) => {
   if (error) {
     return <div>{error}</div>;
   }
-  if (!localData) {
+  if (localData.length < 1) {
     return <div>Loading</div>;
   }
   const chartData = formatChartData(localData);
